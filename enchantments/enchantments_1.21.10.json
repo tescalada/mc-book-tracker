@@ -1,0 +1,1229 @@
+[
+  {
+    "name": "aqua_affinity",
+    "description": "Aqua Affinity",
+    "max_level": 1,
+    "min_cost": 1,
+    "max_cost": 41,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet"
+    ],
+    "librarian_biomes": [
+      "snow"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "bane_of_arthropods",
+    "description": "Bane of Arthropods",
+    "max_level": 5,
+    "min_cost": 5,
+    "max_cost": 25,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword",
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe",
+      "minecraft:mace"
+    ],
+    "librarian_biomes": [
+      "plains"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "binding_curse",
+    "description": "Curse of Binding",
+    "max_level": 1,
+    "min_cost": 25,
+    "max_cost": 50,
+    "rarity_weight": 1,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet",
+      "minecraft:elytra",
+      "minecraft:player_head",
+      "minecraft:creeper_head",
+      "minecraft:zombie_head",
+      "minecraft:skeleton_skull",
+      "minecraft:wither_skeleton_skull",
+      "minecraft:dragon_head",
+      "minecraft:piglin_head",
+      "minecraft:carved_pumpkin"
+    ],
+    "librarian_biomes": [
+      "savanna"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "blast_protection",
+    "description": "Blast Protection",
+    "max_level": 4,
+    "min_cost": 5,
+    "max_cost": 13,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet"
+    ],
+    "librarian_biomes": [
+      "taiga"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "breach",
+    "description": "Breach",
+    "max_level": 4,
+    "min_cost": 15,
+    "max_cost": 65,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:mace"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "channeling",
+    "description": "Channeling",
+    "max_level": 1,
+    "min_cost": 25,
+    "max_cost": 50,
+    "rarity_weight": 1,
+    "applies_to": [
+      "minecraft:trident"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "density",
+    "description": "Density",
+    "max_level": 5,
+    "min_cost": 5,
+    "max_cost": 25,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:mace"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "depth_strider",
+    "description": "Depth Strider",
+    "max_level": 3,
+    "min_cost": 10,
+    "max_cost": 25,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots"
+    ],
+    "librarian_biomes": [
+      "swamp"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "efficiency",
+    "description": "Efficiency",
+    "max_level": 5,
+    "min_cost": 1,
+    "max_cost": 51,
+    "rarity_weight": 10,
+    "applies_to": [
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe",
+      "minecraft:diamond_pickaxe",
+      "minecraft:stone_pickaxe",
+      "minecraft:golden_pickaxe",
+      "minecraft:netherite_pickaxe",
+      "minecraft:wooden_pickaxe",
+      "minecraft:iron_pickaxe",
+      "minecraft:copper_pickaxe",
+      "minecraft:diamond_shovel",
+      "minecraft:stone_shovel",
+      "minecraft:golden_shovel",
+      "minecraft:netherite_shovel",
+      "minecraft:wooden_shovel",
+      "minecraft:iron_shovel",
+      "minecraft:copper_shovel",
+      "minecraft:diamond_hoe",
+      "minecraft:stone_hoe",
+      "minecraft:golden_hoe",
+      "minecraft:netherite_hoe",
+      "minecraft:wooden_hoe",
+      "minecraft:iron_hoe",
+      "minecraft:copper_hoe",
+      "minecraft:shears"
+    ],
+    "librarian_biomes": [
+      "desert"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "feather_falling",
+    "description": "Feather Falling",
+    "max_level": 4,
+    "min_cost": 5,
+    "max_cost": 11,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots"
+    ],
+    "librarian_biomes": [
+      "jungle"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "fire_aspect",
+    "description": "Fire Aspect",
+    "max_level": 2,
+    "min_cost": 10,
+    "max_cost": 60,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword",
+      "minecraft:mace"
+    ],
+    "librarian_biomes": [
+      "taiga"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "fire_protection",
+    "description": "Fire Protection",
+    "max_level": 4,
+    "min_cost": 10,
+    "max_cost": 18,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet"
+    ],
+    "librarian_biomes": [
+      "desert"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "flame",
+    "description": "Flame",
+    "max_level": 1,
+    "min_cost": 20,
+    "max_cost": 50,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:bow"
+    ],
+    "librarian_biomes": [
+      "taiga"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "fortune",
+    "description": "Fortune",
+    "max_level": 3,
+    "min_cost": 15,
+    "max_cost": 65,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe",
+      "minecraft:diamond_pickaxe",
+      "minecraft:stone_pickaxe",
+      "minecraft:golden_pickaxe",
+      "minecraft:netherite_pickaxe",
+      "minecraft:wooden_pickaxe",
+      "minecraft:iron_pickaxe",
+      "minecraft:copper_pickaxe",
+      "minecraft:diamond_shovel",
+      "minecraft:stone_shovel",
+      "minecraft:golden_shovel",
+      "minecraft:netherite_shovel",
+      "minecraft:wooden_shovel",
+      "minecraft:iron_shovel",
+      "minecraft:copper_shovel",
+      "minecraft:diamond_hoe",
+      "minecraft:stone_hoe",
+      "minecraft:golden_hoe",
+      "minecraft:netherite_hoe",
+      "minecraft:wooden_hoe",
+      "minecraft:iron_hoe",
+      "minecraft:copper_hoe"
+    ],
+    "librarian_biomes": [
+      "taiga"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "frost_walker",
+    "description": "Frost Walker",
+    "max_level": 2,
+    "min_cost": 10,
+    "max_cost": 25,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots"
+    ],
+    "librarian_biomes": [
+      "snow"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "impaling",
+    "description": "Impaling",
+    "max_level": 5,
+    "min_cost": 1,
+    "max_cost": 21,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:trident"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "infinity",
+    "description": "Infinity",
+    "max_level": 1,
+    "min_cost": 20,
+    "max_cost": 50,
+    "rarity_weight": 1,
+    "applies_to": [
+      "minecraft:bow"
+    ],
+    "librarian_biomes": [
+      "desert"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "knockback",
+    "description": "Knockback",
+    "max_level": 2,
+    "min_cost": 5,
+    "max_cost": 55,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword"
+    ],
+    "librarian_biomes": [
+      "savanna"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "looting",
+    "description": "Looting",
+    "max_level": 3,
+    "min_cost": 15,
+    "max_cost": 65,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword"
+    ],
+    "librarian_biomes": [
+      "snow"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "loyalty",
+    "description": "Loyalty",
+    "max_level": 3,
+    "min_cost": 12,
+    "max_cost": 50,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:trident"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "luck_of_the_sea",
+    "description": "Luck of the Sea",
+    "max_level": 3,
+    "min_cost": 15,
+    "max_cost": 65,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:fishing_rod"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "lure",
+    "description": "Lure",
+    "max_level": 3,
+    "min_cost": 15,
+    "max_cost": 65,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:fishing_rod"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "mending",
+    "description": "Mending",
+    "max_level": 1,
+    "min_cost": 25,
+    "max_cost": 75,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet",
+      "minecraft:elytra",
+      "minecraft:shield",
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword",
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe",
+      "minecraft:diamond_pickaxe",
+      "minecraft:stone_pickaxe",
+      "minecraft:golden_pickaxe",
+      "minecraft:netherite_pickaxe",
+      "minecraft:wooden_pickaxe",
+      "minecraft:iron_pickaxe",
+      "minecraft:copper_pickaxe",
+      "minecraft:diamond_shovel",
+      "minecraft:stone_shovel",
+      "minecraft:golden_shovel",
+      "minecraft:netherite_shovel",
+      "minecraft:wooden_shovel",
+      "minecraft:iron_shovel",
+      "minecraft:copper_shovel",
+      "minecraft:diamond_hoe",
+      "minecraft:stone_hoe",
+      "minecraft:golden_hoe",
+      "minecraft:netherite_hoe",
+      "minecraft:wooden_hoe",
+      "minecraft:iron_hoe",
+      "minecraft:copper_hoe",
+      "minecraft:bow",
+      "minecraft:crossbow",
+      "minecraft:trident",
+      "minecraft:flint_and_steel",
+      "minecraft:shears",
+      "minecraft:brush",
+      "minecraft:fishing_rod",
+      "minecraft:carrot_on_a_stick",
+      "minecraft:warped_fungus_on_a_stick",
+      "minecraft:mace"
+    ],
+    "librarian_biomes": [
+      "swamp"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "multishot",
+    "description": "Multishot",
+    "max_level": 1,
+    "min_cost": 20,
+    "max_cost": 50,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:crossbow"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "piercing",
+    "description": "Piercing",
+    "max_level": 4,
+    "min_cost": 1,
+    "max_cost": 50,
+    "rarity_weight": 10,
+    "applies_to": [
+      "minecraft:crossbow"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "power",
+    "description": "Power",
+    "max_level": 5,
+    "min_cost": 1,
+    "max_cost": 16,
+    "rarity_weight": 10,
+    "applies_to": [
+      "minecraft:bow"
+    ],
+    "librarian_biomes": [
+      "jungle"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "projectile_protection",
+    "description": "Projectile Protection",
+    "max_level": 4,
+    "min_cost": 3,
+    "max_cost": 9,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet"
+    ],
+    "librarian_biomes": [
+      "jungle"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "protection",
+    "description": "Protection",
+    "max_level": 4,
+    "min_cost": 1,
+    "max_cost": 12,
+    "rarity_weight": 10,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet"
+    ],
+    "librarian_biomes": [
+      "plains"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "punch",
+    "description": "Punch",
+    "max_level": 2,
+    "min_cost": 12,
+    "max_cost": 37,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:bow"
+    ],
+    "librarian_biomes": [
+      "plains"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "quick_charge",
+    "description": "Quick Charge",
+    "max_level": 3,
+    "min_cost": 12,
+    "max_cost": 50,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:crossbow"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "respiration",
+    "description": "Respiration",
+    "max_level": 3,
+    "min_cost": 10,
+    "max_cost": 40,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet"
+    ],
+    "librarian_biomes": [
+      "swamp"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "riptide",
+    "description": "Riptide",
+    "max_level": 3,
+    "min_cost": 17,
+    "max_cost": 50,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:trident"
+    ],
+    "librarian_biomes": [
+      "any"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "sharpness",
+    "description": "Sharpness",
+    "max_level": 5,
+    "min_cost": 1,
+    "max_cost": 21,
+    "rarity_weight": 10,
+    "applies_to": [
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword",
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe"
+    ],
+    "librarian_biomes": [
+      "savanna"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "silk_touch",
+    "description": "Silk Touch",
+    "max_level": 1,
+    "min_cost": 15,
+    "max_cost": 65,
+    "rarity_weight": 1,
+    "applies_to": [
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe",
+      "minecraft:diamond_pickaxe",
+      "minecraft:stone_pickaxe",
+      "minecraft:golden_pickaxe",
+      "minecraft:netherite_pickaxe",
+      "minecraft:wooden_pickaxe",
+      "minecraft:iron_pickaxe",
+      "minecraft:copper_pickaxe",
+      "minecraft:diamond_shovel",
+      "minecraft:stone_shovel",
+      "minecraft:golden_shovel",
+      "minecraft:netherite_shovel",
+      "minecraft:wooden_shovel",
+      "minecraft:iron_shovel",
+      "minecraft:copper_shovel",
+      "minecraft:diamond_hoe",
+      "minecraft:stone_hoe",
+      "minecraft:golden_hoe",
+      "minecraft:netherite_hoe",
+      "minecraft:wooden_hoe",
+      "minecraft:iron_hoe",
+      "minecraft:copper_hoe"
+    ],
+    "librarian_biomes": [
+      "snow"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "smite",
+    "description": "Smite",
+    "max_level": 5,
+    "min_cost": 5,
+    "max_cost": 25,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword",
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe",
+      "minecraft:mace"
+    ],
+    "librarian_biomes": [
+      "plains"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "soul_speed",
+    "description": "Soul Speed",
+    "max_level": 3,
+    "min_cost": 10,
+    "max_cost": 25,
+    "rarity_weight": 1,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots"
+    ],
+    "librarian_biomes": [],
+    "tradeable": false
+  },
+  {
+    "name": "sweeping_edge",
+    "description": "Sweeping Edge",
+    "max_level": 3,
+    "min_cost": 5,
+    "max_cost": 20,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword"
+    ],
+    "librarian_biomes": [
+      "savanna"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "swift_sneak",
+    "description": "Swift Sneak",
+    "max_level": 3,
+    "min_cost": 25,
+    "max_cost": 75,
+    "rarity_weight": 1,
+    "applies_to": [
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings"
+    ],
+    "librarian_biomes": [],
+    "tradeable": false
+  },
+  {
+    "name": "thorns",
+    "description": "Thorns",
+    "max_level": 3,
+    "min_cost": 10,
+    "max_cost": 60,
+    "rarity_weight": 1,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet"
+    ],
+    "librarian_biomes": [
+      "desert"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "unbreaking",
+    "description": "Unbreaking",
+    "max_level": 3,
+    "min_cost": 5,
+    "max_cost": 55,
+    "rarity_weight": 5,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet",
+      "minecraft:elytra",
+      "minecraft:shield",
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword",
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe",
+      "minecraft:diamond_pickaxe",
+      "minecraft:stone_pickaxe",
+      "minecraft:golden_pickaxe",
+      "minecraft:netherite_pickaxe",
+      "minecraft:wooden_pickaxe",
+      "minecraft:iron_pickaxe",
+      "minecraft:copper_pickaxe",
+      "minecraft:diamond_shovel",
+      "minecraft:stone_shovel",
+      "minecraft:golden_shovel",
+      "minecraft:netherite_shovel",
+      "minecraft:wooden_shovel",
+      "minecraft:iron_shovel",
+      "minecraft:copper_shovel",
+      "minecraft:diamond_hoe",
+      "minecraft:stone_hoe",
+      "minecraft:golden_hoe",
+      "minecraft:netherite_hoe",
+      "minecraft:wooden_hoe",
+      "minecraft:iron_hoe",
+      "minecraft:copper_hoe",
+      "minecraft:bow",
+      "minecraft:crossbow",
+      "minecraft:trident",
+      "minecraft:flint_and_steel",
+      "minecraft:shears",
+      "minecraft:brush",
+      "minecraft:fishing_rod",
+      "minecraft:carrot_on_a_stick",
+      "minecraft:warped_fungus_on_a_stick",
+      "minecraft:mace"
+    ],
+    "librarian_biomes": [
+      "jungle"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "vanishing_curse",
+    "description": "Curse of Vanishing",
+    "max_level": 1,
+    "min_cost": 25,
+    "max_cost": 50,
+    "rarity_weight": 1,
+    "applies_to": [
+      "minecraft:leather_boots",
+      "minecraft:copper_boots",
+      "minecraft:chainmail_boots",
+      "minecraft:golden_boots",
+      "minecraft:iron_boots",
+      "minecraft:diamond_boots",
+      "minecraft:netherite_boots",
+      "minecraft:leather_leggings",
+      "minecraft:copper_leggings",
+      "minecraft:chainmail_leggings",
+      "minecraft:golden_leggings",
+      "minecraft:iron_leggings",
+      "minecraft:diamond_leggings",
+      "minecraft:netherite_leggings",
+      "minecraft:leather_chestplate",
+      "minecraft:copper_chestplate",
+      "minecraft:chainmail_chestplate",
+      "minecraft:golden_chestplate",
+      "minecraft:iron_chestplate",
+      "minecraft:diamond_chestplate",
+      "minecraft:netherite_chestplate",
+      "minecraft:leather_helmet",
+      "minecraft:copper_helmet",
+      "minecraft:chainmail_helmet",
+      "minecraft:golden_helmet",
+      "minecraft:iron_helmet",
+      "minecraft:diamond_helmet",
+      "minecraft:netherite_helmet",
+      "minecraft:turtle_helmet",
+      "minecraft:elytra",
+      "minecraft:shield",
+      "minecraft:diamond_sword",
+      "minecraft:stone_sword",
+      "minecraft:golden_sword",
+      "minecraft:netherite_sword",
+      "minecraft:wooden_sword",
+      "minecraft:iron_sword",
+      "minecraft:copper_sword",
+      "minecraft:diamond_axe",
+      "minecraft:stone_axe",
+      "minecraft:golden_axe",
+      "minecraft:netherite_axe",
+      "minecraft:wooden_axe",
+      "minecraft:iron_axe",
+      "minecraft:copper_axe",
+      "minecraft:diamond_pickaxe",
+      "minecraft:stone_pickaxe",
+      "minecraft:golden_pickaxe",
+      "minecraft:netherite_pickaxe",
+      "minecraft:wooden_pickaxe",
+      "minecraft:iron_pickaxe",
+      "minecraft:copper_pickaxe",
+      "minecraft:diamond_shovel",
+      "minecraft:stone_shovel",
+      "minecraft:golden_shovel",
+      "minecraft:netherite_shovel",
+      "minecraft:wooden_shovel",
+      "minecraft:iron_shovel",
+      "minecraft:copper_shovel",
+      "minecraft:diamond_hoe",
+      "minecraft:stone_hoe",
+      "minecraft:golden_hoe",
+      "minecraft:netherite_hoe",
+      "minecraft:wooden_hoe",
+      "minecraft:iron_hoe",
+      "minecraft:copper_hoe",
+      "minecraft:bow",
+      "minecraft:crossbow",
+      "minecraft:trident",
+      "minecraft:flint_and_steel",
+      "minecraft:shears",
+      "minecraft:brush",
+      "minecraft:fishing_rod",
+      "minecraft:carrot_on_a_stick",
+      "minecraft:warped_fungus_on_a_stick",
+      "minecraft:mace",
+      "minecraft:compass",
+      "minecraft:carved_pumpkin",
+      "minecraft:player_head",
+      "minecraft:creeper_head",
+      "minecraft:zombie_head",
+      "minecraft:skeleton_skull",
+      "minecraft:wither_skeleton_skull",
+      "minecraft:dragon_head",
+      "minecraft:piglin_head"
+    ],
+    "librarian_biomes": [
+      "swamp"
+    ],
+    "tradeable": true
+  },
+  {
+    "name": "wind_burst",
+    "description": "Wind Burst",
+    "max_level": 3,
+    "min_cost": 15,
+    "max_cost": 65,
+    "rarity_weight": 2,
+    "applies_to": [
+      "minecraft:mace"
+    ],
+    "librarian_biomes": [],
+    "tradeable": false
+  }
+]
