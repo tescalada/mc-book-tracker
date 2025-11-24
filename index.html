@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <a href="https://github.com/tescalada/mc-book-tracker" class="github-corner"><img loading="lazy" decoding="async" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png" class="attachment-full size-full" alt="Fork me on GitHub"></a>
     <div class="container">
         <div class="header">
             <h1>📚 Minecraft Librarian Trade Tracker</h1>
@@ -17,11 +18,17 @@
         </div>
 
         <div class="controls">
-            <div class="file-input-wrapper">
-                <input type="file" id="fileInput" accept=".json">
-                <label for="fileInput" class="file-label">Load Enchantments JSON</label>
-                <span class="file-name" id="fileName">No file loaded</span>
-            </div>
+            <label>
+                Version:
+                <select id="versionSelect" onchange="loadVersionEnchantments()">
+                    <optgroup label="Java Edition">
+                        <option value="java_1.21.10">1.21.10</option>
+                    </optgroup>
+                    <optgroup label="Bedrock Edition">
+                        <option disabled value="bedrock_1.21.10">TODO</option>
+                    </optgroup>
+                </select>
+            </label>
 
             <label>
                 Filter by Biome:

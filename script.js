@@ -112,24 +112,23 @@ function saveProgress() {
     localStorage.setItem('librarianTracker', JSON.stringify(data));
 }
 
-// Load enchantments from file
-document.getElementById('fileInput').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    document.getElementById('fileName').textContent = file.name;
-
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        try {
-            allEnchantments = JSON.parse(event.target.result);
-            renderEnchantments();
-        } catch (error) {
-            alert('Error loading JSON file: ' + error.message);
+// Load enchantments for selected version
+async function loadVersionEnchantments() {
+    const versionKey = document.getElementById('versionSelect').value;
+    try {
+        // versionKey format: "java_1.21.10" or "bedrock_1.21.10"
+        const response = await fetch(`enchantments/${versionKey}.json`);
+        if (!response.ok) {
+            throw new Error(`Version ${versionKey} not found`);
         }
-    };
-    reader.readAsText(file);
-});
+        const data = await response.json();
+        allEnchantments = data;
+        renderEnchantments();
+    } catch (error) {
+        alert(`Error loading enchantments: ${error.message}`);
+        console.error('Error loading enchantments:', error);
+    }
+}
 
 // Initialize enchantment data if not exists
 function initEnchantmentData(name) {
@@ -481,22 +480,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Auto-load enchantments from default file
-async function autoLoadEnchantments() {
-    try {
-        const response = await fetch('enchantments/enchantments_1.21.10.json');
-        if (response.ok) {
-            const data = await response.json();
-            allEnchantments = data;
-            document.getElementById('fileName').textContent = 'enchantments_1.21.10.json (auto-loaded)';
-            renderEnchantments();
-        }
-    } catch (error) {
-        // File not found or error loading - user can still manually load
-        console.log('Auto-load failed, waiting for manual file selection');
-    }
-}
-
 // Event listeners for filters
 document.getElementById('biomeFilter').addEventListener('change', renderEnchantments);
 document.getElementById('showFilter').addEventListener('change', renderEnchantments);
@@ -504,7 +487,7 @@ document.getElementById('searchInput').addEventListener('input', renderEnchantme
 
 // Initialize
 loadProgress();
-autoLoadEnchantments();
+loadVersionEnchantments();
 
 // Set initial view button text
 document.addEventListener('DOMContentLoaded', function() {
