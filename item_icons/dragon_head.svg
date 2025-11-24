@@ -1,0 +1,19 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ender dragon head (dark purple/black) -->
+  <!-- Horns -->
+  <rect x="4" y="0" width="2" height="3" fill="#8a4a8f"/>
+  <rect x="10" y="0" width="2" height="3" fill="#8a4a8f"/>
+  <!-- Head (dark purple) -->
+  <rect x="4" y="2" width="8" height="8" fill="#1a0020"/>
+  <!-- Head gradient/scales -->
+  <rect x="5" y="3" width="6" height="1" fill="#2d0f3d"/>
+  <rect x="5" y="5" width="6" height="1" fill="#2d0f3d"/>
+  <!-- Eyes (purple glow) -->
+  <rect x="5" y="6" width="2" height="2" fill="#d946ef"/>
+  <rect x="9" y="6" width="2" height="2" fill="#d946ef"/>
+  <!-- Snout/jaw -->
+  <rect x="5" y="10" width="6" height="2" fill="#160019"/>
+  <!-- Teeth -->
+  <rect x="6" y="11" width="1" height="1" fill="#e8e8e8"/>
+  <rect x="9" y="11" width="1" height="1" fill="#e8e8e8"/>
+</svg>

@@ -5,57 +5,85 @@ let enchantmentData = {};
 // View mode: 'card' or 'list'
 let currentView = localStorage.getItem('viewMode') || 'card';
 
-// Get icon path for item name
+// Item group definitions - single source of truth for item types and their icons
+const ITEM_GROUPS = {
+    sword: { icon: 'diamond_sword.png', label: 'Swords' },
+    axe: { icon: 'diamond_axe.png', label: 'Axes' },
+    pickaxe: { icon: 'diamond_pickaxe.png', label: 'Pickaxes' },
+    shovel: { icon: 'diamond_shovel.png', label: 'Shovels' },
+    hoe: { icon: 'diamond_hoe.png', label: 'Hoes' },
+    helmet: { icon: 'diamond_helmet.png', label: 'Helmets' },
+    chestplate: { icon: 'diamond_chestplate.png', label: 'Chestplates' },
+    leggings: { icon: 'diamond_leggings.png', label: 'Leggings' },
+    boots: { icon: 'diamond_boots.png', label: 'Boots' },
+    bow: { icon: 'bow.png', label: 'Bows' },
+    crossbow: { icon: 'crossbow_standby.png', label: 'Crossbows' },
+    trident: { icon: 'trident.png', label: 'Tridents' },
+    compass: { icon: 'compass_00.png', label: 'Compasses' },
+    mace: { icon: 'mace.png', label: 'Maces' },
+    fishing_rod: { icon: 'fishing_rod.png', label: 'Fishing Rods' },
+    head: { icon: 'player_head.svg', label: 'Heads' },
+    elytra: { icon: 'elytra.png', label: 'Elytra' },
+    shield: { icon: 'shield.svg', label: 'Shields' },
+    shears: { icon: 'shears.png', label: 'Shears' },
+    flint_and_steel: { icon: 'flint_and_steel.png', label: 'Flint and Steel' },
+    brush: { icon: 'brush.png', label: 'Brushes' }
+};
+
+// Get icon path for item name (returns generic group icon if applicable)
 function getItemIcon(itemFullName) {
     // Extract item name from minecraft:item_name format
     const parts = itemFullName.split(':');
     const itemName = parts[parts.length - 1];
 
-    // Special cases for items with non-standard filenames
-    const specialCases = {
-        'crossbow': 'crossbow_standby.png'
-    };
-
-    if (specialCases[itemName]) {
-        return `item_icons/${specialCases[itemName]}`;
+    // Check if this is a known item group
+    const baseType = getBaseItemType(itemFullName);
+    if (ITEM_GROUPS[baseType]) {
+        return `item_icons/${ITEM_GROUPS[baseType].icon}`;
     }
 
     // Return the path to the icon
     return `item_icons/${itemName}.png`;
 }
 
-// Get fallback icon for item category
-function getCategoryIcon(itemName) {
-    const lowerItem = itemName.toLowerCase();
+// Get specific icon path for item name (always returns the specific item icon, not the group icon)
+function getSpecificItemIcon(itemFullName) {
+    // Extract item name from minecraft:item_name format
+    const parts = itemFullName.split(':');
+    const itemName = parts[parts.length - 1];
 
-    // Map item types to a representative icon
-    const categoryMap = {
-        'sword': 'diamond_sword.png',
-        'axe': 'diamond_axe.png',
-        'pickaxe': 'diamond_pickaxe.png',
-        'shovel': 'diamond_shovel.png',
-        'hoe': 'diamond_hoe.png',
-        'bow': 'bow.png',
-        'crossbow': 'crossbow_standby.png',
-        'trident': 'trident.png',
-        'mace': 'mace.png',
-        'helmet': 'diamond_helmet.png',
-        'chestplate': 'diamond_chestplate.png',
-        'leggings': 'diamond_leggings.png',
-        'boots': 'diamond_boots.png',
-        'fishing_rod': 'fishing_rod.png',
-        'elytra': 'elytra.png',
-        'shield': 'shield.png',
-        'book': 'book.png'
-    };
+    // Special handling: heads and skulls don't have item textures in Minecraft
+    // Use SVG icons for common mob heads, fallback to generic player_head
+    const baseType = getBaseItemType(itemFullName);
+    if (baseType === 'head') {
+        // Map specific heads to their SVG icons
+        const headSvgMap = {
+            'zombie_head': 'zombie_head.svg',
+            'skeleton_skull': 'skeleton_skull.svg',
+            'wither_skeleton_skull': 'wither_skeleton_skull.svg',
+            'creeper_head': 'creeper_head.svg',
+            'dragon_head': 'dragon_head.svg',
+            'piglin_head': 'piglin_head.svg',
+            'carved_pumpkin': 'carved_pumpkin.png'
+        };
 
-    for (const [key, icon] of Object.entries(categoryMap)) {
-        if (lowerItem.includes(key)) {
-            return `item_icons/${icon}`;
-        }
+        // Use specific SVG if available, otherwise use generic player head
+        return `item_icons/${headSvgMap[itemName] || ITEM_GROUPS.head.icon}`;
     }
 
-    return 'item_icons/barrier.png'; // Default icon
+    // Special handling: items with non-standard texture filenames
+    const specialTextureMap = {
+        'crossbow': 'crossbow_standby.png',
+        'compass': 'compass_00.png',
+        'shield': 'shield.svg'
+    };
+
+    if (specialTextureMap[itemName]) {
+        return `item_icons/${specialTextureMap[itemName]}`;
+    }
+
+    // Return the specific item's icon
+    return `item_icons/${itemName}.png`;
 }
 
 // Check if enchantment applies to item type
@@ -213,6 +241,26 @@ function getFilteredEnchantments() {
     });
 }
 
+// Initialize popovers for item tags with variants
+function initPopovers() {
+    document.querySelectorAll('.item-tag[data-variants]').forEach(tag => {
+        const variantsJson = tag.getAttribute('data-variants');
+        const popover = tag.querySelector('.item-popover');
+        if (popover && variantsJson) {
+            try {
+                const variants = JSON.parse(variantsJson);
+                // Create HTML with icons for each variant
+                const variantHTML = variants.map(v =>
+                    `<div class="popover-item"><img src="${v.icon}" class="popover-icon" onerror="this.src='item_icons/barrier.png'" alt="${v.name}">${v.name}</div>`
+                ).join('');
+                popover.innerHTML = variantHTML;
+            } catch (e) {
+                console.error('Error parsing variant data:', e);
+            }
+        }
+    });
+}
+
 // Render enchantments
 function renderEnchantments() {
     const grid = document.getElementById('enchantmentsGrid');
@@ -234,6 +282,82 @@ function renderEnchantments() {
     }
 
     updateStats();
+    initPopovers();
+}
+
+// Extract base item type from item name (e.g., "diamond_sword" -> "sword")
+function getBaseItemType(itemName) {
+    const parts = itemName.split(':');
+    const name = parts[parts.length - 1];
+
+    // Special case: all mob heads and skulls should be grouped together
+    if (name.endsWith('_head') || name === 'head' || name.endsWith('_skull') || name === 'skull') {
+        return 'head';
+    }
+
+    // Check against all defined item groups
+    // Sort by length descending to check longer/more specific names first (e.g., "pickaxe" before "axe")
+    const types = Object.keys(ITEM_GROUPS).sort((a, b) => b.length - a.length);
+    for (const type of types) {
+        if (name.includes(type)) {
+            return type;
+        }
+    }
+
+    return name; // Return as-is if no match
+}
+
+// Organize items: group by type and return only generic representatives with their variants
+function organizeItemsWithGenerics(itemsList) {
+    // Group items by base type
+    const itemsByType = {};
+    const standaloneItems = [];
+
+    itemsList.forEach(item => {
+        const parts = item.split(':');
+        const itemName = parts[parts.length - 1];
+        const baseType = getBaseItemType(item);
+
+        // If the item name is exactly the base type, it's standalone
+        if (itemName === baseType) {
+            standaloneItems.push(item);
+        } else {
+            if (!itemsByType[baseType]) {
+                itemsByType[baseType] = [];
+            }
+            itemsByType[baseType].push(item);
+        }
+    });
+
+    // Build result: only generic types with their variants attached
+    const result = [];
+    const processedTypes = new Set();
+
+    // Add generic items for types that have variants
+    for (const baseType in itemsByType) {
+        if (itemsByType[baseType].length > 0) {
+            result.push({
+                item: `minecraft:${baseType}`,
+                isGeneric: true,
+                variants: itemsByType[baseType]
+            });
+            processedTypes.add(baseType);
+        }
+    }
+
+    // Add standalone items (items that are already generic)
+    standaloneItems.forEach(item => {
+        const baseType = getBaseItemType(item);
+        if (!processedTypes.has(baseType)) {
+            result.push({
+                item: item,
+                isGeneric: false,
+                variants: []
+            });
+        }
+    });
+
+    return result;
 }
 
 // Render card view
@@ -263,14 +387,35 @@ function renderCardView(filtered) {
             );
         }
 
-        // Format item names with icons
-        const items = enchant.applies_to.slice(0, 10).map(item => {
+        // Organize items - now returns only generic types with variants attached
+        const organizedItems = organizeItemsWithGenerics(enchant.applies_to);
+
+        // Format item names with icons and variant information
+        const items = organizedItems.map(({item, isGeneric, variants}) => {
             const parts = item.split(':');
             const itemName = parts[parts.length - 1].replace(/_/g, ' ');
             const iconPath = getItemIcon(item);
-            return { name: itemName, iconPath: iconPath };
+
+            // Format variants for popover with icons, sorted alphabetically
+            let variantData = [];
+            if (variants && variants.length > 0) {
+                // Sort variants alphabetically
+                const sortedVariants = [...variants].sort();
+                variantData = sortedVariants.map(v => {
+                    const vParts = v.split(':');
+                    const vName = vParts[vParts.length - 1].replace(/_/g, ' ');
+                    const vIcon = getSpecificItemIcon(v);
+                    return { name: vName, icon: vIcon };
+                });
+            }
+
+            return {
+                name: itemName,
+                iconPath: iconPath,
+                isGeneric: isGeneric,
+                variantData: variantData
+            };
         });
-        const moreItems = enchant.applies_to.length > 10 ? ` (+${enchant.applies_to.length - 10} more)` : '';
 
         return `
             <div class="enchantment-card ${cardClass}">
@@ -323,10 +468,12 @@ function renderCardView(filtered) {
                     <div class="applies-to">
                         <span class="applies-to-label">Applies to:</span>
                         <div class="item-list">
-                            ${items.map(item =>
-                                `<span class="item-tag"><img src="${item.iconPath}" class="item-icon" onerror="this.src='item_icons/barrier.png'" alt="${item.name}">${item.name}</span>`
-                            ).join('')}
-                            ${moreItems ? `<span class="item-tag"><img src="item_icons/barrier.png" class="item-icon" alt="more">${moreItems}</span>` : ''}
+                            ${items.map(item => {
+                                const hasVariants = item.variantData && item.variantData.length > 0;
+                                const variantsJson = hasVariants ? ` data-variants='${JSON.stringify(item.variantData)}'` : '';
+                                const variantCount = hasVariants ? ` <span class="variant-count">(${item.variantData.length})</span>` : '';
+                                return `<span class="item-tag ${item.isGeneric ? 'generic-item' : ''}"${variantsJson}><img src="${item.iconPath}" class="item-icon" onerror="this.src='item_icons/barrier.png'" alt="${item.name}">${item.name}${variantCount}${hasVariants ? '<div class="item-popover"></div>' : ''}</span>`;
+                            }).join('')}
                         </div>
                     </div>
                 </div>
@@ -456,21 +603,38 @@ function importData() {
     input.click();
 }
 
+// Initialize item type dropdown from ITEM_GROUPS
+function initItemTypeDropdown() {
+    const optionsContainer = document.getElementById('itemTypeOptions');
+
+    // Clear existing options except "All Items"
+    optionsContainer.innerHTML = '<div data-value="all">All Items</div>';
+
+    // Add options from ITEM_GROUPS
+    for (const [key, config] of Object.entries(ITEM_GROUPS)) {
+        const option = document.createElement('div');
+        option.setAttribute('data-value', key);
+        option.innerHTML = `<img src="item_icons/${config.icon}" class="select-icon">${config.label}`;
+        optionsContainer.appendChild(option);
+    }
+
+    // Add click handlers to all options
+    document.querySelectorAll('#itemTypeOptions div').forEach(option => {
+        option.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            currentItemTypeFilter = value;
+            document.getElementById('itemTypeSelected').innerHTML = this.innerHTML;
+            document.getElementById('itemTypeOptions').classList.add('select-hide');
+            renderEnchantments();
+        });
+    });
+}
+
 // Custom dropdown functionality
 let currentItemTypeFilter = 'all';
 
 document.getElementById('itemTypeSelected').addEventListener('click', function() {
     document.getElementById('itemTypeOptions').classList.toggle('select-hide');
-});
-
-document.querySelectorAll('#itemTypeOptions div').forEach(option => {
-    option.addEventListener('click', function() {
-        const value = this.getAttribute('data-value');
-        currentItemTypeFilter = value;
-        document.getElementById('itemTypeSelected').innerHTML = this.innerHTML;
-        document.getElementById('itemTypeOptions').classList.add('select-hide');
-        renderEnchantments();
-    });
 });
 
 // Close dropdown when clicking outside
@@ -488,6 +652,7 @@ document.getElementById('searchInput').addEventListener('input', renderEnchantme
 // Initialize
 loadProgress();
 loadVersionEnchantments();
+initItemTypeDropdown();
 
 // Set initial view button text
 document.addEventListener('DOMContentLoaded', function() {

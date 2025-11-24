@@ -1,0 +1,13 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minecraft shield - simple rectangle -->
+  <!-- Metal border -->
+  <rect x="3" y="1" width="10" height="13" fill="#8b8b8b"/>
+
+  <!-- Wood face -->
+  <rect x="4" y="2" width="8" height="11" fill="#b89968"/>
+
+  <!-- Wood grain (vertical) -->
+  <rect x="5" y="2" width="1" height="11" fill="#9d8054" opacity="0.5"/>
+  <rect x="7" y="2" width="1" height="11" fill="#9d8054" opacity="0.5"/>
+  <rect x="10" y="2" width="1" height="11" fill="#9d8054" opacity="0.5"/>
+</svg>

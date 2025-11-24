@@ -1,0 +1,12 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Zombie head -->
+  <!-- Hair/head top (darker green) -->
+  <rect x="4" y="0" width="8" height="4" fill="#2d5016"/>
+  <!-- Skin/face (zombie green) -->
+  <rect x="4" y="4" width="8" height="8" fill="#5a7c3e"/>
+  <!-- Eyes (darker) -->
+  <rect x="5" y="6" width="2" height="2" fill="#2d3c1f"/>
+  <rect x="9" y="6" width="2" height="2" fill="#2d3c1f"/>
+  <!-- Mouth (darker) -->
+  <rect x="6" y="10" width="4" height="1" fill="#3d4a2d"/>
+</svg>

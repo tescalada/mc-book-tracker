@@ -246,7 +246,7 @@ def main():
         sys.exit(1)
 
     jar_path = sys.argv[1]
-    output_path = sys.argv[2] if len(sys.argv) > 2 else 'enchantments.json'
+    output_path = sys.argv[2] if len(sys.argv) > 2 else 'enchantments/java_1.21.10.json'
 
     if not Path(jar_path).exists():
         print(f"Error: JAR file not found: {jar_path}")

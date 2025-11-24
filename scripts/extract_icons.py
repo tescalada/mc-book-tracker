@@ -64,8 +64,22 @@ def extract_item_icons(jar_path: str, output_dir: str = 'item_icons',
         sys.exit(1)
 
     # Add essential fallback icons that are used in the UI
-    fallback_icons = {'barrier', 'book'}
+    # Note: Mob heads don't have item textures in Minecraft - they're rendered dynamically
+    fallback_icons = {
+        'barrier',
+        'book'
+    }
     enchantable_items.update(fallback_icons)
+
+    # Special case items that have state-specific or entity textures
+    # Map item name to actual texture filename
+    special_item_textures = {
+        'crossbow': 'crossbow_standby',  # Crossbow has state-specific textures
+        'compass': 'compass_00',  # Compass has animated textures
+        'clock': 'clock_00',  # Clock has animated textures (if enchantable)
+        'bow': 'bow',  # Bow has pulling state textures, but bow.png should exist
+    }
+
     print(f"Added {len(fallback_icons)} fallback icons: {', '.join(sorted(fallback_icons))}")
 
     output_path = Path(output_dir)
@@ -85,8 +99,17 @@ def extract_item_icons(jar_path: str, output_dir: str = 'item_icons',
             and name.endswith('.png')
         ]
 
-        print(f"Found {len(item_files)} item texture files in JAR")
+        # Also get block textures (for heads, skulls, pumpkins, etc.)
+        block_files = [
+            name for name in jar.namelist()
+            if name.startswith('assets/minecraft/textures/block/')
+            and name.endswith('.png')
+        ]
 
+        print(f"Found {len(item_files)} item texture files in JAR")
+        print(f"Found {len(block_files)} block texture files in JAR")
+
+        # Process item textures
         for file_path in item_files:
             # Extract just the filename (without .png extension)
             filename = Path(file_path).name
@@ -109,6 +132,49 @@ def extract_item_icons(jar_path: str, output_dir: str = 'item_icons',
 
             except Exception as e:
                 print(f"  Warning: Failed to extract {filename}: {e}")
+
+        # Process block textures (for heads, skulls, pumpkins)
+        for file_path in block_files:
+            filename = Path(file_path).name
+            item_name = filename[:-4]  # Remove .png extension
+
+            # Only extract if this item is enchantable
+            if item_name not in enchantable_items:
+                skipped_count += 1
+                continue
+
+            # Extract the file (don't overwrite if already exists from item textures)
+            output_file = output_path / filename
+            if output_file.exists():
+                continue
+
+            try:
+                with jar.open(file_path) as source:
+                    with open(output_file, 'wb') as target:
+                        target.write(source.read())
+                extracted_count += 1
+
+                if extracted_count % 20 == 0:
+                    print(f"  Extracted {extracted_count} icons...")
+
+            except Exception as e:
+                print(f"  Warning: Failed to extract {filename}: {e}")
+
+        # Handle special case items with state-specific textures
+        for item_name, texture_name in special_item_textures.items():
+            if item_name in enchantable_items:
+                source_file = f'assets/minecraft/textures/item/{texture_name}.png'
+                target_file = output_path / f'{texture_name}.png'
+
+                if source_file in jar.namelist() and not target_file.exists():
+                    try:
+                        with jar.open(source_file) as source:
+                            with open(target_file, 'wb') as target:
+                                target.write(source.read())
+                        extracted_count += 1
+                        print(f"  Extracted special case: {texture_name}.png for {item_name}")
+                    except Exception as e:
+                        print(f"  Warning: Failed to extract special case {texture_name}.png: {e}")
 
     print(f"\nSuccessfully extracted {extracted_count} item icons to {output_path}/")
     print(f"Skipped {skipped_count} non-enchantable items")

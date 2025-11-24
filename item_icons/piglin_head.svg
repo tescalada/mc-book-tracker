@@ -1,0 +1,19 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Piglin head (pink/salmon colored) -->
+  <!-- Ears -->
+  <rect x="3" y="4" width="1" height="3" fill="#f0a293"/>
+  <rect x="12" y="4" width="1" height="3" fill="#f0a293"/>
+  <!-- Head (piglin pink) -->
+  <rect x="4" y="0" width="8" height="12" fill="#f4a5a0"/>
+  <!-- Hair/crown area (gold tint) -->
+  <rect x="4" y="0" width="8" height="2" fill="#d99c8f"/>
+  <!-- Eyes (white with dark pupil) -->
+  <rect x="5" y="5" width="2" height="2" fill="#ffffff"/>
+  <rect x="9" y="5" width="2" height="2" fill="#ffffff"/>
+  <rect x="5" y="6" width="1" height="1" fill="#2a2a2a"/>
+  <rect x="9" y="6" width="1" height="1" fill="#2a2a2a"/>
+  <!-- Snout/nose (pig nose) -->
+  <rect x="6" y="8" width="4" height="3" fill="#e69388"/>
+  <rect x="6" y="9" width="1" height="1" fill="#8b4a45"/>
+  <rect x="9" y="9" width="1" height="1" fill="#8b4a45"/>
+</svg>

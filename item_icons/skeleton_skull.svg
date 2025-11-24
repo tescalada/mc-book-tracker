@@ -1,0 +1,14 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Skeleton skull -->
+  <!-- Head (bone white) -->
+  <rect x="4" y="0" width="8" height="12" fill="#e8e8e8"/>
+  <!-- Eye sockets (black/dark) -->
+  <rect x="5" y="6" width="2" height="2" fill="#1a1a1a"/>
+  <rect x="9" y="6" width="2" height="2" fill="#1a1a1a"/>
+  <!-- Nose cavity -->
+  <rect x="7" y="8" width="2" height="2" fill="#1a1a1a"/>
+  <!-- Teeth/jaw line -->
+  <rect x="5" y="10" width="1" height="1" fill="#1a1a1a"/>
+  <rect x="7" y="10" width="1" height="1" fill="#1a1a1a"/>
+  <rect x="10" y="10" width="1" height="1" fill="#1a1a1a"/>
+</svg>
