@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Librarian Trade Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            height: 30px;
+            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: #4caf50;
+            height: 100%;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: #f5f5f5;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .controls label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .controls select, .controls input {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .controls select:focus, .controls input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .controls button {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .controls button:hover {
+            background: #5568d3;
+        }
+
+        /* Custom dropdown for item type filter */
+        .custom-select {
+            position: relative;
+            display: inline-block;
+        }
+
+        .select-selected {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+        }
+
+        .select-selected:hover {
+            border-color: #667eea;
+        }
+
+        .select-items {
+            position: absolute;
+            background-color: white;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .select-hide {
+            display: none;
+        }
+
+        .select-items div {
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .select-items div:hover {
+            background-color: #f0f0f0;
+        }
+
+        .select-icon {
+            width: 16px;
+            height: 16px;
+            image-rendering: pixelated;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-left: auto;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .enchantments-grid {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .enchantment-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .enchantment-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .enchantment-card.collected {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .enchantment-card.not-tradeable {
+            opacity: 0.6;
+            background: #fafafa;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .card-title {
+            flex: 1;
+        }
+
+        .enchant-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .enchant-desc {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .card-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .detail {
+            font-size: 0.85em;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .detail-value {
+            color: #333;
+        }
+
+        .biome-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .biome-tag {
+            padding: 4px 10px;
+            background: #667eea;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+
+        .biome-tag.any {
+            background: #4caf50;
+        }
+
+        .not-tradeable-badge {
+            padding: 4px 10px;
+            background: #ff9800;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+
+        .applies-to {
+            grid-column: 1 / -1;
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .applies-to-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .item-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .item-tag {
+            padding: 2px 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            font-size: 0.75em;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .item-icon {
+            width: 16px;
+            height: 16px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            vertical-align: middle;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state h2 {
+            margin-bottom: 10px;
+        }
+
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .file-label {
+            padding: 8px 16px;
+            background: #4caf50;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .file-label:hover {
+            background: #45a049;
+        }
+
+        .file-name {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Minecraft Librarian Trade Tracker</h1>
+            <p>Track your villager trading hall enchantment books</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 / 0 (0%)</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="file-input-wrapper">
+                <input type="file" id="fileInput" accept=".json">
+                <label for="fileInput" class="file-label">Load Enchantments JSON</label>
+                <span class="file-name" id="fileName">No file loaded</span>
+            </div>
+
+            <label>
+                Filter by Biome:
+                <select id="biomeFilter">
+                    <option value="all">All Biomes</option>
+                    <option value="tradeable">Tradeable Only</option>
+                    <option value="desert">Desert</option>
+                    <option value="jungle">Jungle</option>
+                    <option value="plains">Plains</option>
+                    <option value="savanna">Savanna</option>
+                    <option value="snow">Snow</option>
+                    <option value="swamp">Swamp</option>
+                    <option value="taiga">Taiga</option>
+                    <option value="any">Any Biome</option>
+                </select>
+            </label>
+
+            <label>
+                Show:
+                <select id="showFilter">
+                    <option value="all">All</option>
+                    <option value="collected">Collected Only</option>
+                    <option value="missing">Missing Only</option>
+                </select>
+            </label>
+
+            <label>
+                Item Type:
+                <div class="custom-select">
+                    <div class="select-selected" id="itemTypeSelected">All Items</div>
+                    <div class="select-items select-hide" id="itemTypeOptions">
+                        <div data-value="all">All Items</div>
+                        <div data-value="sword"><img src="item_icons/diamond_sword.png" class="select-icon">Swords</div>
+                        <div data-value="axe"><img src="item_icons/diamond_axe.png" class="select-icon">Axes</div>
+                        <div data-value="pickaxe"><img src="item_icons/diamond_pickaxe.png" class="select-icon">Pickaxes</div>
+                        <div data-value="shovel"><img src="item_icons/diamond_shovel.png" class="select-icon">Shovels</div>
+                        <div data-value="hoe"><img src="item_icons/diamond_hoe.png" class="select-icon">Hoes</div>
+                        <div data-value="bow"><img src="item_icons/bow.png" class="select-icon">Bows</div>
+                        <div data-value="crossbow"><img src="item_icons/crossbow_standby.png" class="select-icon">Crossbows</div>
+                        <div data-value="trident"><img src="item_icons/trident.png" class="select-icon">Tridents</div>
+                        <div data-value="mace"><img src="item_icons/mace.png" class="select-icon">Maces</div>
+                        <div data-value="helmet"><img src="item_icons/diamond_helmet.png" class="select-icon">Helmets</div>
+                        <div data-value="chestplate"><img src="item_icons/diamond_chestplate.png" class="select-icon">Chestplates</div>
+                        <div data-value="leggings"><img src="item_icons/diamond_leggings.png" class="select-icon">Leggings</div>
+                        <div data-value="boots"><img src="item_icons/diamond_boots.png" class="select-icon">Boots</div>
+                        <div data-value="fishing_rod"><img src="item_icons/fishing_rod.png" class="select-icon">Fishing Rods</div>
+                    </div>
+                </div>
+            </label>
+
+            <label>
+                <input type="text" id="searchInput" placeholder="Search enchantments...">
+            </label>
+
+            <button onclick="clearAll()">Clear All</button>
+            <button onclick="exportData()">Export Progress</button>
+            <button onclick="importData()">Import Progress</button>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="collectedCount">0</div>
+                    <div class="stat-label">Collected</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="totalCount">0</div>
+                    <div class="stat-label">Total</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="enchantments-grid" id="enchantmentsGrid">
+            <div class="empty-state">
+                <h2>No enchantments loaded</h2>
+                <p>Click "Load Enchantments JSON" to get started</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allEnchantments = [];
+        let collectedEnchantments = new Set();
+
+        // Get icon path for item name
+        function getItemIcon(itemFullName) {
+            // Extract item name from minecraft:item_name format
+            const parts = itemFullName.split(':');
+            const itemName = parts[parts.length - 1];
+
+            // Special cases for items with non-standard filenames
+            const specialCases = {
+                'crossbow': 'crossbow_standby.png'
+            };
+
+            if (specialCases[itemName]) {
+                return `item_icons/${specialCases[itemName]}`;
+            }
+
+            // Return the path to the icon
+            return `item_icons/${itemName}.png`;
+        }
+
+        // Get fallback icon for item category
+        function getCategoryIcon(itemName) {
+            const lowerItem = itemName.toLowerCase();
+
+            // Map item types to a representative icon
+            const categoryMap = {
+                'sword': 'diamond_sword.png',
+                'axe': 'diamond_axe.png',
+                'pickaxe': 'diamond_pickaxe.png',
+                'shovel': 'diamond_shovel.png',
+                'hoe': 'diamond_hoe.png',
+                'bow': 'bow.png',
+                'crossbow': 'crossbow_standby.png',
+                'trident': 'trident.png',
+                'mace': 'mace.png',
+                'helmet': 'diamond_helmet.png',
+                'chestplate': 'diamond_chestplate.png',
+                'leggings': 'diamond_leggings.png',
+                'boots': 'diamond_boots.png',
+                'fishing_rod': 'fishing_rod.png',
+                'elytra': 'elytra.png',
+                'shield': 'shield.png',
+                'book': 'book.png'
+            };
+
+            for (const [key, icon] of Object.entries(categoryMap)) {
+                if (lowerItem.includes(key)) {
+                    return `item_icons/${icon}`;
+                }
+            }
+
+            return 'item_icons/barrier.png'; // Default icon
+        }
+
+        // Check if enchantment applies to item type
+        function appliesToItemType(enchant, itemType) {
+            if (itemType === 'all') return true;
+            return enchant.applies_to.some(item =>
+                item.toLowerCase().includes(itemType)
+            );
+        }
+
+        // Load saved progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('librarianTracker');
+            if (saved) {
+                collectedEnchantments = new Set(JSON.parse(saved));
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem('librarianTracker', JSON.stringify([...collectedEnchantments]));
+        }
+
+        // Load enchantments from file
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            document.getElementById('fileName').textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    allEnchantments = JSON.parse(event.target.result);
+                    renderEnchantments();
+                } catch (error) {
+                    alert('Error loading JSON file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        // Toggle enchantment collected status
+        function toggleEnchantment(name) {
+            if (collectedEnchantments.has(name)) {
+                collectedEnchantments.delete(name);
+            } else {
+                collectedEnchantments.add(name);
+            }
+            saveProgress();
+            renderEnchantments();
+        }
+
+        // Filter enchantments
+        function getFilteredEnchantments() {
+            const biomeFilter = document.getElementById('biomeFilter').value;
+            const showFilter = document.getElementById('showFilter').value;
+            const itemTypeFilter = currentItemTypeFilter;
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+
+            return allEnchantments.filter(enchant => {
+                // Biome filter
+                if (biomeFilter === 'tradeable' && !enchant.tradeable) return false;
+                if (biomeFilter !== 'all' && biomeFilter !== 'tradeable') {
+                    if (!enchant.librarian_biomes.includes(biomeFilter)) return false;
+                }
+
+                // Collection status filter
+                const isCollected = collectedEnchantments.has(enchant.name);
+                if (showFilter === 'collected' && !isCollected) return false;
+                if (showFilter === 'missing' && isCollected) return false;
+
+                // Item type filter
+                if (!appliesToItemType(enchant, itemTypeFilter)) return false;
+
+                // Search filter
+                if (searchText && !enchant.name.toLowerCase().includes(searchText) &&
+                    !enchant.description.toLowerCase().includes(searchText)) {
+                    return false;
+                }
+
+                return true;
+            });
+        }
+
+        // Render enchantments
+        function renderEnchantments() {
+            const grid = document.getElementById('enchantmentsGrid');
+            const filtered = getFilteredEnchantments();
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><h2>No enchantments found</h2><p>Try adjusting your filters</p></div>';
+                updateStats();
+                return;
+            }
+
+            grid.innerHTML = filtered.map(enchant => {
+                const isCollected = collectedEnchantments.has(enchant.name);
+                const cardClass = enchant.tradeable ? (isCollected ? 'collected' : '') : 'not-tradeable';
+
+                // Format item names with icons
+                const items = enchant.applies_to.slice(0, 10).map(item => {
+                    const parts = item.split(':');
+                    const itemName = parts[parts.length - 1].replace(/_/g, ' ');
+                    const iconPath = getItemIcon(item);
+                    return { name: itemName, iconPath: iconPath };
+                });
+                const moreItems = enchant.applies_to.length > 10 ? ` (+${enchant.applies_to.length - 10} more)` : '';
+
+                return `
+                    <div class="enchantment-card ${cardClass}">
+                        <div class="card-header">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox"
+                                    ${isCollected ? 'checked' : ''}
+                                    onchange="toggleEnchantment('${enchant.name}')"
+                                    ${!enchant.tradeable ? 'disabled' : ''}>
+                            </div>
+                            <div class="card-title">
+                                <div class="enchant-name">${enchant.description}</div>
+                                <div class="enchant-desc">${enchant.name}</div>
+                            </div>
+                        </div>
+
+                        ${enchant.tradeable ? `
+                            <div class="biome-tags">
+                                ${enchant.librarian_biomes.map(biome =>
+                                    `<span class="biome-tag ${biome === 'any' ? 'any' : ''}">${biome}</span>`
+                                ).join('')}
+                            </div>
+                        ` : `
+                            <span class="not-tradeable-badge">Not Tradeable</span>
+                        `}
+
+                        <div class="card-details">
+                            <div class="detail">
+                                <span class="detail-label">Max Level:</span>
+                                <span class="detail-value">${enchant.max_level}</span>
+                            </div>
+                            <div class="detail">
+                                <span class="detail-label">Rarity:</span>
+                                <span class="detail-value">${enchant.rarity_weight}</span>
+                            </div>
+                            <div class="detail">
+                                <span class="detail-label">Min Cost:</span>
+                                <span class="detail-value">${enchant.min_cost}</span>
+                            </div>
+                            <div class="detail">
+                                <span class="detail-label">Max Cost:</span>
+                                <span class="detail-value">${enchant.max_cost}</span>
+                            </div>
+                            <div class="applies-to">
+                                <span class="applies-to-label">Applies to:</span>
+                                <div class="item-list">
+                                    ${items.map(item =>
+                                        `<span class="item-tag"><img src="${item.iconPath}" class="item-icon" onerror="this.src='item_icons/barrier.png'" alt="${item.name}">${item.name}</span>`
+                                    ).join('')}
+                                    ${moreItems ? `<span class="item-tag"><img src="item_icons/barrier.png" class="item-icon" alt="more">${moreItems}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            updateStats();
+        }
+
+        // Update statistics
+        function updateStats() {
+            const tradeable = allEnchantments.filter(e => e.tradeable);
+            const collected = tradeable.filter(e => collectedEnchantments.has(e.name)).length;
+            const total = tradeable.length;
+            const percentage = total > 0 ? Math.round((collected / total) * 100) : 0;
+
+            document.getElementById('collectedCount').textContent = collected;
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('progressBar').textContent = `${collected} / ${total} (${percentage}%)`;
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+        }
+
+        // Clear all collected enchantments
+        function clearAll() {
+            if (confirm('Are you sure you want to clear all collected enchantments?')) {
+                collectedEnchantments.clear();
+                saveProgress();
+                renderEnchantments();
+            }
+        }
+
+        // Export progress
+        function exportData() {
+            const data = {
+                collected: [...collectedEnchantments],
+                exportDate: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'librarian-tracker-progress.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Import progress
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        collectedEnchantments = new Set(data.collected || []);
+                        saveProgress();
+                        renderEnchantments();
+                        alert('Progress imported successfully!');
+                    } catch (error) {
+                        alert('Error importing progress: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Custom dropdown functionality
+        let currentItemTypeFilter = 'all';
+
+        document.getElementById('itemTypeSelected').addEventListener('click', function() {
+            document.getElementById('itemTypeOptions').classList.toggle('select-hide');
+        });
+
+        document.querySelectorAll('#itemTypeOptions div').forEach(option => {
+            option.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                currentItemTypeFilter = value;
+                document.getElementById('itemTypeSelected').innerHTML = this.innerHTML;
+                document.getElementById('itemTypeOptions').classList.add('select-hide');
+                renderEnchantments();
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.custom-select')) {
+                document.getElementById('itemTypeOptions').classList.add('select-hide');
+            }
+        });
+
+        // Auto-load enchantments from default file
+        async function autoLoadEnchantments() {
+            try {
+                const response = await fetch('enchantments_1.21.10.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    allEnchantments = data;
+                    document.getElementById('fileName').textContent = 'enchantments_1.21.10.json (auto-loaded)';
+                    renderEnchantments();
+                }
+            } catch (error) {
+                // File not found or error loading - user can still manually load
+                console.log('Auto-load failed, waiting for manual file selection');
+            }
+        }
+
+        // Event listeners for filters
+        document.getElementById('biomeFilter').addEventListener('change', renderEnchantments);
+        document.getElementById('showFilter').addEventListener('change', renderEnchantments);
+        document.getElementById('searchInput').addEventListener('input', renderEnchantments);
+
+        // Initialize
+        loadProgress();
+        autoLoadEnchantments();
+    </script>
+</body>
+</html>
