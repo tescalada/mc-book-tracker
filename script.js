@@ -1,5 +1,7 @@
 let allEnchantments = [];
-let collectedEnchantments = new Set();
+// New data structure: tracks both completion status and individual levels
+// Format: { 'enchantment_name': { complete: boolean, levels: { 1: boolean, 2: boolean, ... } } }
+let enchantmentData = {};
 
 // Get icon path for item name
 function getItemIcon(itemFullName) {
@@ -62,17 +64,36 @@ function appliesToItemType(enchant, itemType) {
     );
 }
 
+// Convert rarity weight to readable label
+function getRarityLabel(weight) {
+    if (weight >= 10) return 'Very Common';
+    if (weight >= 5) return 'Common';
+    if (weight >= 2) return 'Uncommon';
+    return 'Rare';
+}
+
 // Load saved progress from localStorage
 function loadProgress() {
     const saved = localStorage.getItem('librarianTracker');
     if (saved) {
-        collectedEnchantments = new Set(JSON.parse(saved));
+        try {
+            const data = JSON.parse(saved);
+            enchantmentData = data.enchantments || {};
+        } catch (error) {
+            console.error('Error loading progress:', error);
+            enchantmentData = {};
+        }
     }
 }
 
 // Save progress to localStorage
 function saveProgress() {
-    localStorage.setItem('librarianTracker', JSON.stringify([...collectedEnchantments]));
+    const data = {
+        version: 2,
+        enchantments: enchantmentData,
+        lastUpdated: new Date().toISOString()
+    };
+    localStorage.setItem('librarianTracker', JSON.stringify(data));
 }
 
 // Load enchantments from file
@@ -94,15 +115,55 @@ document.getElementById('fileInput').addEventListener('change', function(e) {
     reader.readAsText(file);
 });
 
-// Toggle enchantment collected status
-function toggleEnchantment(name) {
-    if (collectedEnchantments.has(name)) {
-        collectedEnchantments.delete(name);
-    } else {
-        collectedEnchantments.add(name);
+// Initialize enchantment data if not exists
+function initEnchantmentData(name) {
+    if (!enchantmentData[name]) {
+        const enchant = allEnchantments.find(e => e.name === name);
+        const maxLevel = enchant ? enchant.max_level : 1;
+
+        const levels = {};
+        for (let i = 1; i <= maxLevel; i++) {
+            levels[i] = false;
+        }
+
+        enchantmentData[name] = {
+            complete: false,
+            levels: levels
+        };
     }
+}
+
+// Toggle enchantment complete status
+function toggleEnchantment(name) {
+    initEnchantmentData(name);
+    enchantmentData[name].complete = !enchantmentData[name].complete;
     saveProgress();
     renderEnchantments();
+}
+
+// Toggle specific level for an enchantment
+function toggleEnchantmentLevel(name, level) {
+    initEnchantmentData(name);
+    enchantmentData[name].levels[level] = !enchantmentData[name].levels[level];
+    saveProgress();
+    renderEnchantments();
+}
+
+// Check if enchantment is complete
+function isEnchantmentComplete(name) {
+    return enchantmentData[name]?.complete || false;
+}
+
+// Check if enchantment has any levels checked
+function hasAnyLevels(name) {
+    if (!enchantmentData[name]) return false;
+    return Object.values(enchantmentData[name].levels).some(checked => checked);
+}
+
+// Get count of checked levels
+function getCheckedLevelsCount(name) {
+    if (!enchantmentData[name]) return 0;
+    return Object.values(enchantmentData[name].levels).filter(checked => checked).length;
 }
 
 // Filter enchantments
@@ -120,7 +181,7 @@ function getFilteredEnchantments() {
         }
 
         // Collection status filter
-        const isCollected = collectedEnchantments.has(enchant.name);
+        const isCollected = isEnchantmentComplete(enchant.name);
         if (showFilter === 'collected' && !isCollected) return false;
         if (showFilter === 'missing' && isCollected) return false;
 
@@ -149,8 +210,29 @@ function renderEnchantments() {
     }
 
     grid.innerHTML = filtered.map(enchant => {
-        const isCollected = collectedEnchantments.has(enchant.name);
-        const cardClass = enchant.tradeable ? (isCollected ? 'collected' : '') : 'not-tradeable';
+        const isCollected = isEnchantmentComplete(enchant.name);
+        const hasLevels = hasAnyLevels(enchant.name);
+
+        // Determine card class based on status
+        let cardClass = '';
+        if (!enchant.tradeable) {
+            cardClass = 'not-tradeable';
+        } else if (isCollected) {
+            cardClass = 'collected';
+        } else if (hasLevels) {
+            cardClass = 'partial-progress';
+        }
+
+        // Generate level badges
+        const levelBadgesHTML = [];
+        const romanNumerals = ['I', 'II', 'III', 'IV', 'V'];
+        for (let i = 1; i <= enchant.max_level; i++) {
+            const isChecked = enchantmentData[enchant.name]?.levels[i] || false;
+            const badgeClass = isChecked ? 'level-badge checked' : 'level-badge';
+            levelBadgesHTML.push(
+                `<button class="${badgeClass}" onclick="toggleEnchantmentLevel('${enchant.name}', ${i})">${romanNumerals[i - 1] || i}</button>`
+            );
+        }
 
         // Format item names with icons
         const items = enchant.applies_to.slice(0, 10).map(item => {
@@ -168,11 +250,17 @@ function renderEnchantments() {
                         <input type="checkbox"
                             ${isCollected ? 'checked' : ''}
                             onchange="toggleEnchantment('${enchant.name}')"
-                            ${!enchant.tradeable ? 'disabled' : ''}>
+                            title="Mark as complete">
                     </div>
                     <div class="card-title">
                         <div class="enchant-name">${enchant.description}</div>
-                        <div class="enchant-desc">${enchant.name}</div>
+                    </div>
+                </div>
+
+                <div class="level-selector">
+                    <label class="level-label">Levels:</label>
+                    <div class="level-badges">
+                        ${levelBadgesHTML.join('')}
                     </div>
                 </div>
 
@@ -183,7 +271,7 @@ function renderEnchantments() {
                         ).join('')}
                     </div>
                 ` : `
-                    <span class="not-tradeable-badge">Not Tradeable</span>
+                    <span class="not-tradeable-badge">⚠️ Not Available from Librarians</span>
                 `}
 
                 <div class="card-details">
@@ -193,7 +281,7 @@ function renderEnchantments() {
                     </div>
                     <div class="detail">
                         <span class="detail-label">Rarity:</span>
-                        <span class="detail-value">${enchant.rarity_weight}</span>
+                        <span class="detail-value">${getRarityLabel(enchant.rarity_weight)}</span>
                     </div>
                     <div class="detail">
                         <span class="detail-label">Min Cost:</span>
@@ -223,7 +311,7 @@ function renderEnchantments() {
 // Update statistics
 function updateStats() {
     const tradeable = allEnchantments.filter(e => e.tradeable);
-    const collected = tradeable.filter(e => collectedEnchantments.has(e.name)).length;
+    const collected = tradeable.filter(e => isEnchantmentComplete(e.name)).length;
     const total = tradeable.length;
     const percentage = total > 0 ? Math.round((collected / total) * 100) : 0;
 
@@ -235,8 +323,8 @@ function updateStats() {
 
 // Clear all collected enchantments
 function clearAll() {
-    if (confirm('Are you sure you want to clear all collected enchantments?')) {
-        collectedEnchantments.clear();
+    if (confirm('Are you sure you want to clear all progress (complete status and levels)?')) {
+        enchantmentData = {};
         saveProgress();
         renderEnchantments();
     }
@@ -245,7 +333,8 @@ function clearAll() {
 // Export progress
 function exportData() {
     const data = {
-        collected: [...collectedEnchantments],
+        version: 2,
+        enchantments: enchantmentData,
         exportDate: new Date().toISOString()
     };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -270,7 +359,7 @@ function importData() {
         reader.onload = function(event) {
             try {
                 const data = JSON.parse(event.target.result);
-                collectedEnchantments = new Set(data.collected || []);
+                enchantmentData = data.enchantments || {};
                 saveProgress();
                 renderEnchantments();
                 alert('Progress imported successfully!');
