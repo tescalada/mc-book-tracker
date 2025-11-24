@@ -63,6 +63,11 @@ def extract_item_icons(jar_path: str, output_dir: str = 'item_icons',
         print("Error: No enchantable items found. Cannot proceed.")
         sys.exit(1)
 
+    # Add essential fallback icons that are used in the UI
+    fallback_icons = {'barrier', 'book'}
+    enchantable_items.update(fallback_icons)
+    print(f"Added {len(fallback_icons)} fallback icons: {', '.join(sorted(fallback_icons))}")
+
     output_path = Path(output_dir)
     output_path.mkdir(exist_ok=True)
 
