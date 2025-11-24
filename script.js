@@ -2,6 +2,8 @@ let allEnchantments = [];
 // New data structure: tracks both completion status and individual levels
 // Format: { 'enchantment_name': { complete: boolean, levels: { 1: boolean, 2: boolean, ... } } }
 let enchantmentData = {};
+// View mode: 'card' or 'list'
+let currentView = localStorage.getItem('viewMode') || 'card';
 
 // Get icon path for item name
 function getItemIcon(itemFullName) {
@@ -70,6 +72,20 @@ function getRarityLabel(weight) {
     if (weight >= 5) return 'Common';
     if (weight >= 2) return 'Uncommon';
     return 'Rare';
+}
+
+// Toggle view mode
+function toggleView() {
+    currentView = currentView === 'card' ? 'list' : 'card';
+    localStorage.setItem('viewMode', currentView);
+
+    // Update button text
+    const viewBtn = document.getElementById('viewToggle');
+    if (viewBtn) {
+        viewBtn.textContent = currentView === 'card' ? '☰ List View' : '▦ Card View';
+    }
+
+    renderEnchantments();
 }
 
 // Load saved progress from localStorage
@@ -203,13 +219,27 @@ function renderEnchantments() {
     const grid = document.getElementById('enchantmentsGrid');
     const filtered = getFilteredEnchantments();
 
+    // Update grid class based on view mode
+    grid.className = currentView === 'list' ? 'enchantments-list' : 'enchantments-grid';
+
     if (filtered.length === 0) {
         grid.innerHTML = '<div class="empty-state"><h2>No enchantments found</h2><p>Try adjusting your filters</p></div>';
         updateStats();
         return;
     }
 
-    grid.innerHTML = filtered.map(enchant => {
+    if (currentView === 'list') {
+        grid.innerHTML = renderListView(filtered);
+    } else {
+        grid.innerHTML = renderCardView(filtered);
+    }
+
+    updateStats();
+}
+
+// Render card view
+function renderCardView(filtered) {
+    return filtered.map(enchant => {
         const isCollected = isEnchantmentComplete(enchant.name);
         const hasLevels = hasAnyLevels(enchant.name);
 
@@ -304,8 +334,63 @@ function renderEnchantments() {
             </div>
         `;
     }).join('');
+}
 
-    updateStats();
+// Render list view
+function renderListView(filtered) {
+    return `
+        <div class="list-view-container">
+            ${filtered.map(enchant => {
+                const isCollected = isEnchantmentComplete(enchant.name);
+                const hasLevels = hasAnyLevels(enchant.name);
+
+                // Determine row class based on status
+                let rowClass = 'list-item';
+                if (!enchant.tradeable) {
+                    rowClass += ' not-tradeable';
+                } else if (isCollected) {
+                    rowClass += ' collected';
+                } else if (hasLevels) {
+                    rowClass += ' partial-progress';
+                }
+
+                // Generate level badges
+                const levelBadgesHTML = [];
+                const romanNumerals = ['I', 'II', 'III', 'IV', 'V'];
+                for (let i = 1; i <= enchant.max_level; i++) {
+                    const isChecked = enchantmentData[enchant.name]?.levels[i] || false;
+                    const badgeClass = isChecked ? 'level-badge checked' : 'level-badge';
+                    levelBadgesHTML.push(
+                        `<button class="${badgeClass}" onclick="toggleEnchantmentLevel('${enchant.name}', ${i})">${romanNumerals[i - 1] || i}</button>`
+                    );
+                }
+
+                return `
+                    <div class="${rowClass}">
+                        <div class="list-item-checkbox">
+                            <input type="checkbox"
+                                ${isCollected ? 'checked' : ''}
+                                onchange="toggleEnchantment('${enchant.name}')"
+                                title="Mark as complete">
+                        </div>
+                        <div class="list-item-name">${enchant.description}</div>
+                        <div class="list-item-levels">
+                            ${levelBadgesHTML.join('')}
+                        </div>
+                        <div class="list-item-biomes">
+                            ${enchant.tradeable ?
+                                enchant.librarian_biomes.slice(0, 3).map(biome =>
+                                    `<span class="biome-tag ${biome === 'any' ? 'any' : ''}">${biome}</span>`
+                                ).join('') + (enchant.librarian_biomes.length > 3 ? `<span class="biome-more">+${enchant.librarian_biomes.length - 3}</span>` : '')
+                                : `<span class="not-tradeable-badge-small">⚠️</span>`
+                            }
+                        </div>
+                        <div class="list-item-rarity">${getRarityLabel(enchant.rarity_weight)}</div>
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
 }
 
 // Update statistics
@@ -420,3 +505,11 @@ document.getElementById('searchInput').addEventListener('input', renderEnchantme
 // Initialize
 loadProgress();
 autoLoadEnchantments();
+
+// Set initial view button text
+document.addEventListener('DOMContentLoaded', function() {
+    const viewBtn = document.getElementById('viewToggle');
+    if (viewBtn) {
+        viewBtn.textContent = currentView === 'card' ? '☰ List View' : '▦ Card View';
+    }
+});

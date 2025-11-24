@@ -458,3 +458,126 @@ body {
     display: block;
     margin-bottom: 5px;
 }
+
+/* List View Styles */
+.enchantments-list {
+    padding: 0;
+    display: block;
+}
+
+.list-view-container {
+    width: 100%;
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: 40px 200px 1fr 200px 120px;
+    gap: 15px;
+    align-items: center;
+    padding: 12px 30px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background 0.2s ease;
+}
+
+.list-item:hover {
+    background: #f9f9f9;
+}
+
+.list-item.collected {
+    background: #e8f5e9;
+    border-left: 4px solid #4caf50;
+}
+
+.list-item.partial-progress {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+}
+
+.list-item.not-tradeable {
+    background: #fff8e1;
+    border-left: 4px solid #ffc107;
+}
+
+.list-item-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.list-item-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.05em;
+}
+
+.list-item-levels {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.list-item-levels .level-badge {
+    padding: 4px 10px;
+    font-size: 0.85em;
+    min-width: 32px;
+}
+
+.list-item-biomes {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.list-item-biomes .biome-tag {
+    font-size: 0.7em;
+    padding: 3px 8px;
+}
+
+.biome-more {
+    font-size: 0.75em;
+    color: #666;
+    padding: 3px 6px;
+}
+
+.not-tradeable-badge-small {
+    font-size: 0.9em;
+    padding: 3px 8px;
+    background: #ff9800;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.list-item-rarity {
+    font-size: 0.9em;
+    color: #666;
+    text-align: right;
+}
+
+/* Responsive list view */
+@media (max-width: 1200px) {
+    .list-item {
+        grid-template-columns: 40px 180px 1fr 150px 100px;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .list-item {
+        grid-template-columns: 30px 1fr;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .list-item-levels,
+    .list-item-biomes,
+    .list-item-rarity {
+        grid-column: 2;
+    }
+
+    .list-item-name {
+        grid-column: 2;
+        margin-bottom: 8px;
+    }
+}
