@@ -783,7 +783,7 @@
         // Auto-load enchantments from default file
         async function autoLoadEnchantments() {
             try {
-                const response = await fetch('enchantments_1.21.10.json');
+                const response = await fetch('enchantments/enchantments_1.21.10.json');
                 if (response.ok) {
                     const data = await response.json();
                     allEnchantments = data;
