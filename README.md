@@ -11,6 +11,12 @@ A web-based tool for tracking enchanted book trades from Minecraft librarian vil
 - 📤 Export/Import progress as JSON
 - 🎨 Clean, responsive UI with item icons
 
+## Related Tools
+
+💡 **Inspired by [iamcal's Enchantment Order Calculator](https://iamcal.github.io/enchant-order/)**
+
+Once you've collected your enchanted books, use iamcal's tool to combine them in the optimal order to minimize XP cost and avoid the "Too Expensive!" penalty.
+
 ## Quick Start
 
 ### Using the Web App
