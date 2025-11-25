@@ -663,20 +663,60 @@ body {
 }
 
 @media (max-width: 768px) {
-    .list-item {
-        grid-template-columns: 30px 1fr;
-        gap: 10px;
+    /* Make cards fit mobile screens */
+    .enchantments-grid {
+        grid-template-columns: 1fr;
         padding: 15px;
+        gap: 15px;
     }
 
-    .list-item-levels,
-    .list-item-biomes,
-    .list-item-rarity {
-        grid-column: 2;
+    /* Compact single-row list view for mobile */
+    .list-item {
+        display: flex;
+        gap: 8px;
+        padding: 10px 12px;
+        align-items: center;
+    }
+
+    .list-item-checkbox {
+        flex-shrink: 0;
+        order: 1;
     }
 
     .list-item-name {
-        grid-column: 2;
-        margin-bottom: 8px;
+        flex: 1;
+        font-size: 0.95em;
+        min-width: 0;
+        order: 2;
+    }
+
+    .list-item-biomes {
+        display: flex;
+        gap: 3px;
+        flex-shrink: 0;
+        margin-left: 6px;
+        order: 3;
+    }
+
+    .list-item-levels {
+        display: flex;
+        gap: 3px;
+        flex-shrink: 0;
+        font-size: 0.8em;
+        margin-left: auto;
+        order: 4;
+    }
+
+    .list-item-biomes .biome-tag {
+        width: 6px;
+        height: 6px;
+        padding: 0;
+        border-radius: 50%;
+        font-size: 0;
+        min-width: 6px;
+    }
+
+    .list-item-rarity {
+        display: none;
     }
 }
